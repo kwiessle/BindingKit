@@ -15,7 +15,7 @@ public final class Binding<Model>: AnyBinding {
     var syncAll: (AnyKeyPath) -> ()
     
     
-    init(_ textField: UITextField, observer: BindingObserver<Model>, property: WritableKeyPath<Model,String>) {
+    public init(_ textField: UITextField, observer: BindingObserver<Model>, property: WritableKeyPath<Model,String>) {
         self.property = property
         self.syncAll = observer.snyAll
         
@@ -30,7 +30,7 @@ public final class Binding<Model>: AnyBinding {
         textField.text = observer.wrappedValue[keyPath: property]
     }
     
-    init(_ textField: UITextField, observer: BindingObserver<Model>, property: WritableKeyPath<Model,String?>) {
+    public init(_ textField: UITextField, observer: BindingObserver<Model>, property: WritableKeyPath<Model,String?>) {
         self.property = property
         self.syncAll = observer.snyAll
         
@@ -45,7 +45,7 @@ public final class Binding<Model>: AnyBinding {
         textField.text = observer.wrappedValue[keyPath: property]
     }
     
-    init<Value:LosslessStringConvertible>(_ label: UILabel, observer: BindingObserver<Model>, property: WritableKeyPath<Model,Value>, onChange: ((Value)->())?) {
+    public init<Value:LosslessStringConvertible>(_ label: UILabel, observer: BindingObserver<Model>, property: WritableKeyPath<Model,Value>, onChange: ((Value)->())?) {
         self.syncAll = observer.snyAll
         self.property = property
         if let onChange = onChange {
@@ -70,7 +70,7 @@ public final class Binding<Model>: AnyBinding {
         
     }
     
-    init(_ slider: UISlider, observer: BindingObserver<Model>, property: WritableKeyPath<Model,Float>) {
+    public init(_ slider: UISlider, observer: BindingObserver<Model>, property: WritableKeyPath<Model,Float>) {
         self.syncAll = observer.snyAll
         self.property = property
         self.update = { [weak slider, weak observer, weak property] in
@@ -84,7 +84,7 @@ public final class Binding<Model>: AnyBinding {
         slider.value = observer.wrappedValue[keyPath: property]
     }
 
-    init(_ slider: UISlider, observer: BindingObserver<Model>, property: WritableKeyPath<Model,Double>) {
+    public init(_ slider: UISlider, observer: BindingObserver<Model>, property: WritableKeyPath<Model,Double>) {
         self.syncAll = observer.snyAll
         self.property = property
         self.update = { [weak slider, weak observer, weak property] in
@@ -98,7 +98,7 @@ public final class Binding<Model>: AnyBinding {
         slider.value = Float(observer.wrappedValue[keyPath: property])
     }
 
-    init(_ switch: UISwitch, observer: BindingObserver<Model>, property: WritableKeyPath<Model,Bool>) {
+    public init(_ switch: UISwitch, observer: BindingObserver<Model>, property: WritableKeyPath<Model,Bool>) {
         self.syncAll = observer.snyAll
         self.property = property
         self.update = { [weak `switch`, weak observer, weak property] in
@@ -112,7 +112,7 @@ public final class Binding<Model>: AnyBinding {
         `switch`.isOn = observer.wrappedValue[keyPath: property]
     }
     
-    init<Value:LosslessStringConvertible>(_ segmentedControl: UISegmentedControl, observer: BindingObserver<Model>, property: WritableKeyPath<Model,[Value]>, onUpdate: @escaping((Value)->())) {
+    public init<Value:LosslessStringConvertible>(_ segmentedControl: UISegmentedControl, observer: BindingObserver<Model>, property: WritableKeyPath<Model,[Value]>, onUpdate: @escaping((Value)->())) {
         self.syncAll = observer.snyAll
         self.property = property
         self.update = { [weak observer, weak property, weak segmentedControl] in
